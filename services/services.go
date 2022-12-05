@@ -13,7 +13,7 @@ type Services struct {
 
 func New(s *storage.Storage) *Services {
 	return &Services{
-		Invoice:     invoice.New(s),
-		Transaction: transaction.New(s),
+		Invoice:     invoice.New(s, transaction.NewCoreService(s)),
+		Transaction: transaction.New(s, invoice.NewCoreService(s)),
 	}
 }
